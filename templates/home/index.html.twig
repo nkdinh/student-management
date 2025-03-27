@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home - Student Management System{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4">Welcome to the Student Management System</h1>
+            <p class="lead">Streamline your educational management process with our comprehensive system.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-graduate mb-3" style="font-size: 2.5rem; color: #4e73df;"></i>
+                        <h3 class="card-title">Students</h3>
+                        <p class="card-text">Manage student profiles, track progress, and handle enrollments.</p>
+                        <a href="{{ path('app_student_index') }}" class="btn btn-primary">Manage Students</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book mb-3" style="font-size: 2.5rem; color: #1cc88a;"></i>
+                        <h3 class="card-title">Courses</h3>
+                        <p class="card-text">Browse available courses, manage curriculum, and course details.</p>
+                        <a href="{{ path('app_course_index') }}" class="btn btn-success">Explore Courses</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chalkboard-teacher mb-3" style="font-size: 2.5rem; color: #36b9cc;"></i>
+                        <h3 class="card-title">Teachers</h3>
+                        <p class="card-text">View teacher profiles, assignments, and course allocations.</p>
+                        <a href="{{ path('app_teacher_index') }}" class="btn btn-info">View Teachers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-8 mx-auto text-center">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h4>Quick Access to Enrollments</h4>
+                        <p>Manage student enrollments, course assignments, and class schedules all in one place.</p>
+                        <a href="{{ path('app_enrollment_index') }}" class="btn btn-secondary">Manage Enrollments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

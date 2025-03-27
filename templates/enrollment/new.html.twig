@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Enrollment{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Create New Enrollment</h1>
+
+        <form method="post">
+            <div class="mb-3">
+                <label for="course" class="form-label">Course</label>
+                <select name="course" id="course" class="form-select" required>
+                    <option value="">Select a course</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}">{{ course.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Select Students</label>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="select-all" class="form-check-input">
+                                </th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="students[]" value="{{ student.id }}" class="form-check-input">
+                                    </td>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.email }}</td>
+                                    <td>{{ student.phone }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enroll Selected Students</button>
+            <a href="{{ path('app_enrollment_index') }}" class="btn btn-secondary">Back to list</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('select-all').addEventListener('change', function() {
+            const checkboxes = document.getElementsByName('students[]');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+    </script>
+{% endblock %}

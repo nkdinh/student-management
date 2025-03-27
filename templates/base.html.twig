@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Management{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+        main {
+            flex: 1;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .navbar-brand {
+            font-weight: 600;
+        }
+        .nav-link {
+            font-weight: 500;
+        }
+        table a {
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            margin: 0 0.2rem;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        table a:first-child {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        table a:nth-child(2) {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        table a:last-child {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        a[href*="new"] {
+            background-color: #198754;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+    
+        .form-title {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid #f8f9fa;
+            padding-bottom: 0.5rem;
+        }
+    
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    
+        .form-label {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+    
+        .form-control {
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #ced4da;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    
+        .form-control:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: 0;
+        }
+    
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+    
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+    
+        .btn-secondary:hover {
+            background-color: #5c636a;
+            border-color: #565e64;
+            color: white;
+        }
+    
+        .form-actions {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f8f9fa;
+        }
+    
+        /* Date picker styling */
+        .datetime-widget {
+            display: block;
+            width: 100%;
+        }
+    
+        /* Error messages */
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+    
+        .is-invalid {
+            border-color: #dc3545;
+        }
+    
+        .is-invalid:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+    
+        /* Small screens adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #212529;
+            box-shadow: 0 -2px 4px rgba(0,0,0,.1);
+        }
+        footer h5 {
+            color: #fff;
+            font-weight: 600;
+        }
+        footer ul li {
+            margin-bottom: 0.75rem;
+        }
+        footer a {
+            color: rgba(255,255,255,.75);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        .social-links a {
+            font-size: 1.25rem;
+            margin-right: 1.5rem;
+        }
+        .social-links a:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('home') }}">Student Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_student_index') }}">Students</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_course_index') }}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_teacher_index') }}">Teachers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_enrollment_index') }}">Enrollments</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-4">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-4">Student Management System</h5>
+                    <p class="mb-0 text-light">Empowering education through efficient management and organization.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ path('app_student_index') }}" class="text-light">Students</a></li>
+                        <li class="mb-2"><a href="{{ path('app_course_index') }}" class="text-light">Courses</a></li>
+                        <li class="mb-2"><a href="{{ path('app_teacher_index') }}" class="text-light">Teachers</a></li>
+                        <li class="mb-2"><a href="{{ path('app_enrollment_index') }}" class="text-light">Enrollments</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-4">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> contact@student.edu.vn</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> (84) 835-364-115</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Ho Chi Minh City, Vietnam</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-light opacity-25">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-light">© 2025 Student Management System. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-light me-4"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-light me-4"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
